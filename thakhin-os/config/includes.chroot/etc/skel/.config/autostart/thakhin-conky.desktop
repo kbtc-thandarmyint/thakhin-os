@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Thakhin Conky
+Name[my]=သခင် Conky widget
+Comment=Immersive desktop widget — chairman, slogan & system stats
+Exec=bash -c "sleep 6; conky -c ~/.config/conky/conky.conf"
+Icon=/usr/share/pixmaps/thakhinos.png
+Terminal=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=6
+Categories=System;

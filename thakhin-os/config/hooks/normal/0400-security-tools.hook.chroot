@@ -76,10 +76,46 @@ echo "==== Anonymity & tunnelling ===="
 inst "tor torsocks proxychains4 openvpn redsocks obfs4proxy
       macchanger stunnel4 sshuttle"
 
+echo "==== Advanced: C2 & post-exploitation ===="
+inst "sliver powershell-empire starkiller pwncat merlin-cli villain
+      weevely webshells laudanum mimikatz nishang"
+
+echo "==== Advanced: recon / OSINT (Go & friends) ===="
+inst "amass subfinder httpx-toolkit naabu katana dnsx gospider
+      waybackurls gau assetfinder shuffledns puredns
+      gitleaks trufflehog sherlock photon spiderfoot osrframework"
+
+echo "==== Advanced: web / API attack ===="
+inst "dalfox xsstrike arjun paramspider kiterunner jwt-tool
+      nosqlmap tplmap crlfuzz dontgo403 uro"
+
+echo "==== Advanced: Active Directory / Windows ===="
+inst "bloodhound neo4j bloodhound.py evil-winrm kerbrute certipy-ad
+      python3-ldapdomaindump python3-bloodhound windapsearch
+      python3-minikerberos python3-lsassy pypykatz"
+
+echo "==== Advanced: wireless / phishing frameworks ===="
+inst "wifiphisher wifipumpkin3 eaphammer fluxion routersploit
+      king-phisher gophish evilginx2 hostapd-wpe"
+
+echo "==== Advanced: cloud / container ===="
+inst "pacu scoutsuite trivy prowler cloudbrute kube-hunter
+      docker-bench-security"
+
+echo "==== Advanced: reversing / fuzzing / exploit-dev ===="
+inst "afl++ pwndbg gef peda python3-ropgadget one-gadget
+      cutter gdb-peda radamsa honggfuzz frida objection
+      apktool dex2jar jadx apksigner"
+
+echo "==== Advanced: payload generation ===="
+inst "veil shellter donut-shellcode msfpc unicorn-magic
+      python3-donut"
+
 echo "==== Scripting libs & misc ===="
 inst "python3-scapy python3-pwntools python3-requests python3-shodan
-      socat netcat-traditional netcat-openbsd rlwrap
-      seclists payloadsallthethings exe2hexbat"
+      socat netcat-traditional netcat-openbsd rlwrap tmux
+      seclists payloadsallthethings exe2hexbat wordlists
+      chisel ligolo-ng proxychains4 sshuttle"
 
 # Make Wireshark usable by non-root (dumpcap setuid group)
 if [ -x /usr/bin/dumpcap ]; then
@@ -94,5 +130,13 @@ fi
 [ -d /usr/share/wordlists ] || mkdir -p /usr/share/wordlists
 [ -f /usr/share/wordlists/rockyou.txt.gz ] && gunzip -k /usr/share/wordlists/rockyou.txt.gz 2>/dev/null || true
 
+# Reclaim disk: the arsenal is large — drop caches/docs to keep the ISO sane
 apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 2>/dev/null || true
+rm -rf /usr/share/doc/* /usr/share/man/?? /usr/share/man/??_* 2>/dev/null || true
+find /var/log -type f -exec truncate -s 0 {} + 2>/dev/null || true
+
 echo "==== Security arsenal hook finished (best-effort complete) ===="
+echo "Installed security binaries in PATH:"
+compgen -c 2>/dev/null | sort -u | grep -iE '^(nmap|msfconsole|sqlmap|hydra|john|hashcat|aircrack-ng|wireshark|bettercap|amass|subfinder|nuclei|bloodhound|evil-winrm|sliver|empire|responder|crackmapexec|netexec|ghidra|radare2|volatility3)$' | tr '\n' ' ' || true
+echo

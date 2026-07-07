@@ -8,6 +8,13 @@ set -euxo pipefail
 export DEBIAN_FRONTEND=noninteractive
 ARCH="${THAKHIN_ARCH:-amd64}"
 
+# Self-log to the bind-mounted dist/ so the build survives host/session restarts
+# (container runs detached; the log + ISO land on the host regardless).
+mkdir -p /src/dist
+rm -f "/src/dist/DONE-$ARCH" "/src/dist/FAILED-$ARCH"
+exec > >(tee "/src/dist/build-$ARCH.log") 2>&1
+trap 'rc=$?; echo "==== BUILD FAILED ($ARCH) rc=$rc ===="; touch "/src/dist/FAILED-$ARCH"' ERR
+
 echo "==== [1/6] Installing build tooling (arch=$ARCH) ===="
 apt-get update
 apt-get install -y --no-install-recommends \
@@ -93,4 +100,5 @@ mkdir -p /src/dist
 OUT="/src/dist/ThakhinOS-1.0-$ARCH.iso"
 for iso in "$BUILD"/*.iso; do cp -v "$iso" "$OUT"; done
 ( cd /src/dist && sha256sum "ThakhinOS-1.0-$ARCH.iso" | tee "ThakhinOS-1.0-$ARCH.iso.sha256" )
+touch "/src/dist/DONE-$ARCH"
 echo "==== BUILD COMPLETE ($ARCH) ===="

@@ -1,0 +1,15 @@
+#!/bin/bash
+# thakhin-install — launch the Calamares installer from the live desktop.
+# In the live session the `thakhin` user has passwordless sudo (live-config),
+# so `sudo -E` starts Calamares as root while keeping the X display/auth.
+export XDG_CURRENT_DESKTOP=XFCE
+if ! command -v calamares >/dev/null 2>&1; then
+    xmessage "Calamares installer not found." 2>/dev/null
+    exit 1
+fi
+# Prefer polkit (works on installed system too); fall back to passwordless sudo.
+if command -v pkexec >/dev/null 2>&1 && pkexec true 2>/dev/null; then
+    exec pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" calamares
+else
+    exec sudo -E calamares
+fi

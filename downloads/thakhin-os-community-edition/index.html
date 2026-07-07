@@ -165,11 +165,11 @@
             <tr><td>Version</td><td>1.0 — codename "Thakin Gyi" (ပထမဆုံး တရားဝင်ထုတ်ဝေမှု)</td></tr>
             <tr><td>ထုတ်ဝေသည့်နေ့</td><td>ဇူလိုင် ၇ ရက်၊ ၂၀၂၆</td></tr>
             <tr><td>Base System</td><td>Debian 12 (bookworm) — stable</td></tr>
-            <tr><td>Desktop</td><td>XFCE 4.18 (မဘသ gold/dark theme + Padauk fonts)</td></tr>
-            <tr><td>Installer</td><td>Calamares — ဥက္ကဋ္ဌကြီး fun-facts & quiz slideshow ပါဝင်</td></tr>
+            <tr><td>Desktop</td><td>XFCE 4.18 — Greybird-dark + Papirus + ရွှေရောင် accent, compositing, Whisker menu, Conky widget, Padauk fonts (immersive)</td></tr>
+            <tr><td>Installer</td><td>Calamares — restyled gold/dark + ဥက္ကဋ္ဌကြီး fun-facts & animated quiz slideshow</td></tr>
             <tr><td>Architecture</td><td>amd64 (x86-64, BIOS+UEFI) &amp; arm64 (aarch64, UEFI — Apple Silicon)</td></tr>
             <tr><td>ISO ဖိုင်များ</td><td><code>ThakhinOS-1.0-amd64.iso</code> · <code>ThakhinOS-1.0-arm64.iso</code> (~5–7 GB)</td></tr>
-            <tr><td>Security arsenal</td><td>Kali/Parrot-style — Metasploit, nmap, Wireshark, aircrack-ng, John, Hashcat, sqlmap, Burp-alt (ZAP) စသည် ရာနှင့်ချီ</td></tr>
+            <tr><td>Security arsenal</td><td>Kali/Parrot-style ရာနှင့်ချီ — Metasploit, nmap, Wireshark, aircrack-ng, John, Hashcat, sqlmap, ZAP + advanced frameworks (Sliver, Empire, BloodHound, Amass, Pacu, Frida)</td></tr>
             <tr><td>Root/sudo culture</td><td><code>thakhin &lt;command&gt;</code> = root အခွင့်အာဏာ (sudo ကို ဆက်လက်အသုံးပြုနိုင်)</td></tr>
             <tr><td>Live user</td><td><code>thakhin</code> (password မလို — thakhin/sudo အပြည့်)</td></tr>
             <tr><td>ထုတ်ဝေသူ</td><td>AnonyLatt ဌာနကြီး | တောသားနှိမ်နင်းရေးအသင်း | MTC အသိအမှတ်ပြု</td></tr>
@@ -205,6 +205,12 @@
             <div class="dl-card"><i class="fab fa-apple"></i>
                 <h4>Apple Silicon ready</h4>
                 <p>arm64 ISO ဖြင့် M1/M2/M3/M4 Mac များတွင် UTM သုံး၍ native အမြန်နှုန်းဖြင့် run နိုင်သည်။ amd64 ကတော့ PC/Intel Mac အတွက်။</p></div>
+            <div class="dl-card"><i class="fas fa-wand-magic-sparkles"></i>
+                <h4>Immersive Desktop</h4>
+                <p>Greybird-dark + Papirus + ရွှေရောင် accent၊ compositing shadows/transparency၊ Whisker menu၊ ဂုဏ်ယူဖွယ် Conky widget (ဥက္ကဋ္ဌကြီး quote + system stats)၊ transparent gold terminal။</p></div>
+            <div class="dl-card"><i class="fas fa-font"></i>
+                <h4>မြန်မာစာ Terminal</h4>
+                <p>fontconfig fallback ဖြင့် terminal, neofetch, conky တို့တွင် မြန်မာစာ ပီပြင်စွာ ပေါ်သည် — tofu box မရှိတော့ပါ။</p></div>
         </div>
     </section>
 
@@ -234,6 +240,16 @@
                 <p>radare2 · Ghidra · gdb · binwalk · foremost · Volatility3 · exiftool · steghide · yara</p></div>
             <div class="dl-card"><i class="fas fa-user-secret"></i><h4>Audit &amp; Anonymity</h4>
                 <p>Lynis · chkrootkit · rkhunter · Tor · proxychains · OpenVPN · sshuttle</p></div>
+            <div class="dl-card"><i class="fas fa-satellite-dish"></i><h4>C2 &amp; Post-Exploitation</h4>
+                <p>Sliver · PowerShell-Empire · Starkiller · pwncat · Merlin · Villain · chisel · ligolo-ng</p></div>
+            <div class="dl-card"><i class="fas fa-sitemap"></i><h4>Active Directory</h4>
+                <p>BloodHound + neo4j · evil-winrm · kerbrute · Certipy · pypykatz · ldapdomaindump · windapsearch</p></div>
+            <div class="dl-card"><i class="fas fa-cloud"></i><h4>Cloud &amp; Container</h4>
+                <p>Pacu · ScoutSuite · Trivy · Prowler · kube-hunter · docker-bench-security</p></div>
+            <div class="dl-card"><i class="fas fa-satellite"></i><h4>Recon Frameworks</h4>
+                <p>Amass · subfinder · httpx · naabu · katana · dnsx · gospider · gitleaks · trufflehog · Sherlock</p></div>
+            <div class="dl-card"><i class="fas fa-mobile-alt"></i><h4>Mobile &amp; Exploit-Dev</h4>
+                <p>apktool · jadx · dex2jar · Frida · Objection · afl++ · pwndbg · GEF · ROPgadget · Veil</p></div>
         </div>
         <p style="text-align:center;color:#888;font-family:'Padauk',sans-serif;margin-top:26px;">
             တပ်ဆင်ပြီးနောက် terminal တွင် <code>thakhin-arsenal</code> ရိုက်၍ ရရှိပြီးသား tools စာရင်းကြည့်နိုင်သည်။

@@ -19,6 +19,16 @@ dbus-x11
 gnome-themes-extra
 adwaita-icon-theme
 
+# Immersive desktop styling
+greybird-gtk-theme
+papirus-icon-theme
+xfce4-whiskermenu-plugin
+xfce4-clipman-plugin
+conky-all
+feh
+numlockx
+lxpolkit
+
 # Live system + graphical installer
 live-boot
 live-config

@@ -15,8 +15,8 @@ Builds for **amd64** (PC / Intel Mac / VirtualBox) **and arm64** (Apple Silicon 
 | Plymouth boot splash | Chairman logo + flag + pulsing gold dots |
 | Calamares graphical installer | Restyled gold/dark QSS + **animated 22-slide fun-fact & quiz slideshow** (bouncy transitions, spinning ☸ wheel, flag/MTC banner) |
 | LightDM login | Thakhin wallpaper, Padauk font |
-| XFCE desktop | 4 wallpapers (incl. MTC official), Adwaita-dark + gold GTK, branded "☸ သခင် OS" panel |
-| Terminal | neofetch ☸ logo + random fact on every shell; gold ☸ prompt; flag stripe in MOTD |
+| XFCE desktop | Greybird-dark + Papirus + gold accent, compositing (shadows/transparency), Whisker menu "☸ သခင် OS", Conky widget, 4 wallpapers |
+| Terminal | transparent gold/dark theme; **Myanmar renders** (fontconfig Padauk fallback); neofetch ☸ + random fact each shell; gold ☸ prompt; flag stripe in MOTD |
 | Root/sudo culture | **`thakhin <command>`** replaces `sudo` (real sudo kept intact); themed Burmese sudo lecture |
 | CLI tools | `thakhin`, `thakhin-arsenal`, `thakhin-facts`, `tarzan-check` |
 | Firefox | Homepage = bundled offline copy of winkokolatt.me (whole site in `/usr/share/thakhin-os/website`) |
@@ -32,6 +32,13 @@ Hashcat, Hydra, Medusa, sqlmap, Nikto, gobuster, ffuf, WPScan, OWASP ZAP, nuclei
 Impacket, CrackMapExec/NetExec, radare2, Ghidra, binwalk, Volatility3, SecLists,
 exploit-db, Lynis, chkrootkit, Tor, proxychains — plus the pinned Kali repo for
 `thakhin apt install <more>`. **For authorized testing / CTF / education only.**
+
+**Advanced frameworks:** Sliver / PowerShell-Empire / Starkiller / pwncat (C2),
+Amass / subfinder / httpx / naabu / katana / dnsx / gospider / gitleaks (recon),
+BloodHound + neo4j / evil-winrm / kerbrute / Certipy / pypykatz (Active Directory),
+Pacu / ScoutSuite / Trivy / kube-hunter (cloud/container), Frida / apktool / jadx
+(mobile), afl++ / pwndbg / GEF / ROPgadget / Veil (exploit-dev). `thakhin-arsenal` lists
+what's present. All best-effort so a missing package never breaks the build.
 
 ## Build
 

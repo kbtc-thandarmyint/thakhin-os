@@ -28,5 +28,12 @@ FACTS=(
 )
 
 i=$((RANDOM % ${#FACTS[@]}))
+
+# --plain: no ANSI, no footer — for conky / scripts
+if [ "${1:-}" = "--plain" ]; then
+    echo "${FACTS[$i]}"
+    exit 0
+fi
+
 echo -e "${GOLD}☸ သခင်အလင်းစာစဉ် #$((i+1)) —${NC} ${FACTS[$i]}"
 echo -e "${ORANGE}  (နောက်တစ်ခုသိချင်ရင် 'thakhin-facts' | quiz ဖြေချင်ရင် 'tarzan-check')${NC}"

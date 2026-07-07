@@ -244,7 +244,7 @@ Presentation {
                 }
             }
 
-            /* ---- slide-change animation: photo bounce + text glide ---- */
+            /* ---- slide-change animation: photo bounce + text fade/slide ---- */
             ParallelAnimation {
                 id: bounceAnim
                 NumberAnimation {
@@ -253,12 +253,12 @@ Presentation {
                     easing.type: Easing.OutBack; easing.overshoot: 2.2
                 }
                 NumberAnimation {
-                    target: contentWrap; property: "opacity"
+                    target: content; property: "opacity"
                     from: 0.0; to: 1.0; duration: 650
                 }
                 NumberAnimation {
-                    target: contentWrap; property: "anchors.leftMargin"
-                    from: 70; to: 24; duration: 650
+                    target: content; property: "x"
+                    from: 60; to: 0; duration: 650
                     easing.type: Easing.OutCubic
                 }
             }
