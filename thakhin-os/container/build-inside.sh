@@ -88,7 +88,7 @@ lb config noauto \
   --memtest none \
   --apt-recommends true \
   --compression gzip \
-  --bootappend-live "boot=live components quiet splash username=thakhin hostname=thakhin-os locales=en_US.UTF-8 keyboard-layouts=us live-config.timezone=Asia/Yangon live-config.user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,scanner,bluetooth,sudo,docker,wireshark" \
+  --bootappend-live "boot=live components quiet splash username=thakhin hostname=thakhin-os locales=en_US.UTF-8 keyboard-layouts=us live-config.timezone=Asia/Yangon live-config.user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,scanner,bluetooth,sudo,docker,wireshark,nopasswdlogin" \
   --iso-application "Thakhin OS 1.0 - Anti-Tarzan Community Edition" \
   --iso-publisher "Anti-Tarzan Association; Chairman Win Ko Ko Latt (AnonyLatt Dept.)" \
   --iso-volume "THAKHIN_OS_1_0_$ARCH"
