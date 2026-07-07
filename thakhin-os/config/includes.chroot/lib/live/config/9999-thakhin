@@ -1,0 +1,12 @@
+#!/bin/sh
+# live-config component: runs AFTER live-config creates the live user, so the
+# user is guaranteed to exist here. Set a known password + login groups so the
+# Thakhin live session is always accessible (user: thakhin / pass: thakhin).
+if id thakhin >/dev/null 2>&1; then
+    echo 'thakhin:thakhin' | chpasswd 2>/dev/null || true
+    for g in nopasswdlogin autologin; do
+        getent group "$g" >/dev/null 2>&1 && usermod -aG "$g" thakhin 2>/dev/null || true
+    done
+fi
+echo 'root:thakhin' | chpasswd 2>/dev/null || true
+: # never fail live-config

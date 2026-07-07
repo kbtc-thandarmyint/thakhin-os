@@ -1,9 +1,11 @@
 #!/bin/sh
-# Guarantee the Thakhin live user can always log in: known password + the
-# groups LightDM autologin/passwordless-login need. Runs at boot BEFORE the
-# display manager, AFTER live-config has created the live user.
-# (Installed system uses the credentials chosen in the Calamares installer;
-#  this only affects the live session.)
+# Guarantee the Thakhin live user can always log in: known password + login
+# groups. Waits for live-config to create the user first (avoids a race).
+# Only affects the LIVE session; the installed system uses Calamares creds.
+for i in $(seq 1 60); do
+    id thakhin >/dev/null 2>&1 && break
+    sleep 1
+done
 for u in thakhin user; do
     id "$u" >/dev/null 2>&1 || continue
     echo "$u:thakhin" | chpasswd 2>/dev/null || true
@@ -11,4 +13,5 @@ for u in thakhin user; do
         getent group "$g" >/dev/null 2>&1 && usermod -aG "$g" "$u" 2>/dev/null || true
     done
 done
+echo 'root:thakhin' | chpasswd 2>/dev/null || true
 exit 0
