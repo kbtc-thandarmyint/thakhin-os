@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
-    <property name="ThemeName" type="string" value="Greybird-dark"/>
-    <property name="IconThemeName" type="string" value="Papirus-Dark"/>
+    <property name="ThemeName" type="string" value="Fluent-Dark"/>
+    <property name="IconThemeName" type="string" value="Fluent-dark"/>
     <property name="DoubleClickTime" type="int" value="400"/>
     <property name="CursorThemeName" type="string" value="Adwaita"/>
+    <property name="EnableEventSounds" type="bool" value="false"/>
   </property>
   <property name="Gtk" type="empty">
     <property name="FontName" type="string" value="Padauk 11"/>
     <property name="MonospaceFontName" type="string" value="DejaVu Sans Mono 11"/>
     <property name="CursorThemeName" type="string" value="Adwaita"/>
     <property name="CursorThemeSize" type="int" value="24"/>
+    <property name="ButtonImages" type="bool" value="true"/>
+    <property name="MenuImages" type="bool" value="true"/>
     <property name="FontRenderingConfig" type="empty">
       <property name="Antialiasing" type="int" value="1"/>
       <property name="Hinting" type="int" value="1"/>

@@ -19,15 +19,22 @@ dbus-x11
 gnome-themes-extra
 adwaita-icon-theme
 
-# Immersive desktop styling
+# Immersive desktop styling (Windows 11/10 look via Fluent + XFCE taskbar)
 greybird-gtk-theme
 papirus-icon-theme
 xfce4-whiskermenu-plugin
 xfce4-clipman-plugin
+xfce4-panel-profiles
+xfce4-notifyd
 conky-all
 feh
 numlockx
 lxpolkit
+# Fluent (Windows 11) theme build deps
+sassc
+libglib2.0-bin
+gtk2-engines-murrine
+gtk2-engines-pixbuf
 
 # Live system + graphical installer
 live-boot

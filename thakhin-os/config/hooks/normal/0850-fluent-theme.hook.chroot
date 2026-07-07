@@ -1,0 +1,39 @@
+#!/bin/bash
+# Install the Fluent (Windows 11 Fluent Design) GTK + icon + xfwm4 theme so
+# Thakhin OS looks/feels like Windows 11/10 while staying XFCE under the hood.
+# Best-effort: if GitHub/deps hiccup, the build falls back to Greybird-dark.
+set -u
+cd /tmp || exit 0
+
+echo "==== Installing Fluent (Windows 11) GTK theme ===="
+if git clone --depth 1 https://github.com/vinceliuice/Fluent-gtk-theme.git >/tmp/fluent-gtk.log 2>&1; then
+  ( cd Fluent-gtk-theme && \
+    ./install.sh -d /usr/share/themes -c dark -t default >>/tmp/fluent-gtk.log 2>&1 ) \
+    && echo "  + Fluent GTK theme installed" \
+    || echo "  - Fluent GTK theme install failed (see /tmp/fluent-gtk.log)"
+else
+  echo "  - Fluent GTK clone failed"
+fi
+
+echo "==== Installing Fluent (Windows 11) icon theme ===="
+if git clone --depth 1 https://github.com/vinceliuice/Fluent-icon-theme.git >/tmp/fluent-icon.log 2>&1; then
+  ( cd Fluent-icon-theme && \
+    ./install.sh -d /usr/share/icons >>/tmp/fluent-icon.log 2>&1 ) \
+    && echo "  + Fluent icon theme installed" \
+    || echo "  - Fluent icon theme install failed (see /tmp/fluent-icon.log)"
+else
+  echo "  - Fluent icon clone failed"
+fi
+
+# Fallback safety: if Fluent-Dark did not get installed, retarget skel configs
+# to Greybird-dark / Papirus so the desktop is never unthemed.
+if [ ! -d /usr/share/themes/Fluent-Dark ]; then
+  echo "  ! Fluent missing — falling back to Greybird-dark in skel"
+  for f in /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml \
+           /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml; do
+    [ -f "$f" ] && sed -i 's/Fluent-Dark/Greybird-dark/g; s/Fluent-dark/Papirus-Dark/g' "$f"
+  done
+fi
+
+rm -rf /tmp/Fluent-gtk-theme /tmp/Fluent-icon-theme
+echo "==== Fluent theme hook done ===="

@@ -4,18 +4,20 @@
   <property name="panels" type="array">
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="true"/>
+    <!-- Windows-style single taskbar along the bottom -->
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="position" type="string" value="p=8;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
-      <property name="position-locked" type="bool" value="true"/>
+      <property name="mode" type="uint" value="0"/>
+      <property name="size" type="uint" value="40"/>
       <property name="icon-size" type="uint" value="22"/>
-      <property name="size" type="uint" value="36"/>
+      <property name="position-locked" type="bool" value="true"/>
       <property name="background-style" type="uint" value="1"/>
       <property name="background-rgba" type="array">
-        <value type="double" value="0.051"/>
-        <value type="double" value="0.051"/>
-        <value type="double" value="0.051"/>
-        <value type="double" value="0.94"/>
+        <value type="double" value="0.086"/>
+        <value type="double" value="0.086"/>
+        <value type="double" value="0.086"/>
+        <value type="double" value="0.97"/>
       </property>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
@@ -31,44 +33,45 @@
     </property>
   </property>
   <property name="plugins" type="empty">
+    <!-- Start button -->
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="button-icon" type="string" value="/usr/share/pixmaps/thakhinos.png"/>
-      <property name="button-title" type="string" value="☸ သခင် OS"/>
+      <property name="button-title" type="string" value="Start"/>
       <property name="show-button-title" type="bool" value="true"/>
       <property name="show-button-icon" type="bool" value="true"/>
     </property>
     <property name="plugin-2" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
+    <!-- Window buttons (Windows taskbar style: labelled, never grouped) -->
     <property name="plugin-3" type="string" value="tasklist">
-      <property name="grouping" type="uint" value="1"/>
+      <property name="grouping" type="uint" value="0"/>
       <property name="show-labels" type="bool" value="true"/>
+      <property name="flat-buttons" type="bool" value="false"/>
+      <property name="show-handle" type="bool" value="false"/>
+      <property name="window-scrolling" type="bool" value="false"/>
     </property>
+    <!-- Spacer pushes the tray to the right -->
     <property name="plugin-4" type="string" value="separator">
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-5" type="string" value="clipman"/>
-    <property name="plugin-6" type="string" value="systray">
+    <property name="plugin-5" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="icon-size" type="int" value="18"/>
     </property>
+    <property name="plugin-6" type="string" value="clipman"/>
     <property name="plugin-7" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
     </property>
+    <!-- Clock: Windows-style time over date, bottom right -->
     <property name="plugin-8" type="string" value="clock">
       <property name="mode" type="uint" value="2"/>
-      <property name="digital-date-format" type="string" value="%a %d %b"/>
-      <property name="digital-time-format" type="string" value="%H:%M ☸"/>
+      <property name="digital-layout" type="uint" value="3"/>
+      <property name="digital-time-format" type="string" value="%I:%M %p"/>
+      <property name="digital-date-format" type="string" value="%d/%m/%Y ☸"/>
     </property>
-    <property name="plugin-9" type="string" value="actions">
-      <property name="appearance" type="uint" value="0"/>
-      <property name="items" type="array">
-        <value type="string" value="+lock-screen"/>
-        <value type="string" value="+logout"/>
-        <value type="string" value="+restart"/>
-        <value type="string" value="+shutdown"/>
-      </property>
-    </property>
+    <!-- Show desktop button at the far right corner (Windows) -->
+    <property name="plugin-9" type="string" value="showdesktop"/>
   </property>
 </channel>
