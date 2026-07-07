@@ -29,6 +29,15 @@ rm -rf "$BUILD"; mkdir -p "$BUILD"
 cp -a /src/config "$BUILD/config"
 mkdir -p "$BUILD/config/includes.chroot/usr/share/thakhin-os/website"
 
+# Arch-specific packages (grub bootloader payloads differ; ltrace is x86-only)
+if [ "$ARCH" = "amd64" ]; then
+  printf 'grub-pc-bin\ngrub-efi-amd64-bin\nltrace\n' \
+    > "$BUILD/config/package-lists/arch.list.chroot"
+else
+  printf 'grub-efi-arm64-bin\n' \
+    > "$BUILD/config/package-lists/arch.list.chroot"
+fi
+
 echo "==== [2/6] Bundling winkokolatt.me website into the OS ===="
 rsync -a --exclude 'thakhin-os' --exclude '.git' /website/ \
   "$BUILD/config/includes.chroot/usr/share/thakhin-os/website/"
