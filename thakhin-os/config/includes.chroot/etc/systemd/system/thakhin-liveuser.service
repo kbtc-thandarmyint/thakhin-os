@@ -1,0 +1,13 @@
+[Unit]
+Description=Thakhin OS live user setup (known password + login groups)
+After=live-config.service systemd-user-sessions.service
+Before=display-manager.service lightdm.service graphical.target
+ConditionKernelCommandLine=boot=live
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/thakhin-liveuser-setup
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Guarantee the Thakhin live user can always log in: known password + the
+# groups LightDM autologin/passwordless-login need. Runs at boot BEFORE the
+# display manager, AFTER live-config has created the live user.
+# (Installed system uses the credentials chosen in the Calamares installer;
+#  this only affects the live session.)
+for u in thakhin user; do
+    id "$u" >/dev/null 2>&1 || continue
+    echo "$u:thakhin" | chpasswd 2>/dev/null || true
+    for g in nopasswdlogin autologin sudo docker wireshark plugdev netdev video audio; do
+        getent group "$g" >/dev/null 2>&1 && usermod -aG "$g" "$u" 2>/dev/null || true
+    done
+done
+exit 0
