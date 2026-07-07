@@ -1,0 +1,25 @@
+#!/bin/sh
+# Bake the live user into the image at BUILD time. This cannot race or fail the
+# way runtime (live-config/systemd) password-setting did: the user exists in the
+# squashfs with a known password and the login groups, so BOTH autologin and
+# password login (thakhin / thakhin) work in the live session.
+set -e
+
+addgroup --system nopasswdlogin 2>/dev/null || true
+addgroup --system autologin 2>/dev/null || true
+
+if ! id thakhin >/dev/null 2>&1; then
+    useradd -m -s /bin/bash -c "Thakhin" thakhin
+fi
+echo 'thakhin:thakhin' | chpasswd
+echo 'root:thakhin' | chpasswd
+
+for g in sudo nopasswdlogin autologin plugdev netdev video audio cdrom dip floppy scanner bluetooth docker wireshark; do
+    getent group "$g" >/dev/null 2>&1 && usermod -aG "$g" thakhin 2>/dev/null || true
+done
+
+# Passwordless sudo for the live user (installed system uses Calamares creds)
+echo 'thakhin ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/90-thakhin-nopasswd
+chmod 0440 /etc/sudoers.d/90-thakhin-nopasswd
+
+echo "Baked live user 'thakhin' (pass: thakhin) with login groups."

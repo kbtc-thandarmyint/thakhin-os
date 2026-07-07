@@ -1,25 +1,15 @@
 #!/bin/sh
-# Live session: auto-login straight to the XFCE desktop, with a guaranteed
-# fallback so the user can always get in.
+# Auto-login the baked 'thakhin' user straight into XFCE. High-priority conf.d
+# file (90-) so it overrides anything live-config writes.
 set -e
 
-# Groups LightDM's autologin / passwordless login rely on.
-addgroup --system nopasswdlogin 2>/dev/null || true
-addgroup --system autologin 2>/dev/null || true
-
-# Explicit LightDM autologin (belt; live-config configures this too once the
-# user-default-groups override is gone).
 mkdir -p /etc/lightdm/lightdm.conf.d
-cat > /etc/lightdm/lightdm.conf.d/60-thakhin-autologin.conf <<EOF
+cat > /etc/lightdm/lightdm.conf.d/90-thakhin-autologin.conf <<EOF
 [Seat:*]
 autologin-user=thakhin
 autologin-user-timeout=0
 autologin-session=xfce
 user-session=xfce
-greeter-show-manual-login=true
 EOF
 
-# Fallback: boot service that sets a known live password + login groups.
-systemctl enable thakhin-liveuser.service 2>/dev/null || true
-
-echo "Thakhin live autologin + fallback login configured (user: thakhin / pass: thakhin)."
+echo "Autologin configured for baked user 'thakhin' (session xfce)."
