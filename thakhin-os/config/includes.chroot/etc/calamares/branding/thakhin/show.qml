@@ -103,6 +103,14 @@ Presentation {
                   head: "Laptop / PC ဟောင်းသစ်မရွေး",
                   body: "Thakhin OS သည် BIOS နှင့် UEFI နှစ်မျိုးလုံး ထောက်ပံ့သော hybrid ISO ဖြစ်သဖြင့် Windows laptop များ၊ Linux PC များ၊ Intel Mac များပေါ်တွင် USB မှတစ်ဆင့် တိုက်ရိုက် တပ်ဆင်နိုင်သည်။ VirtualBox / VMware / UTM တို့တွင်လည်း အဆင်ပြေသည်။" },
 
+                { img: "slide11.jpg", tag: "😄 Tech သိကောင်းစရာ #၁",
+                  head: "sudo → thakhin",
+                  body: "Thakhin OS တွင် root အခွင့်အာဏာ တောင်းရန် sudo အစား thakhin ကို သုံးသည်။ ဝင်ရောက်တိုက်ခိုက်လာသော hacker တာဇံများ command မှတ်မိမှု ရှုပ်ထွေးသွားစေရန် ဥက္ကဋ္ဌကြီး ကိုယ်တိုင် ဒီဇိုင်းဆွဲထားခြင်း ဖြစ်သည် (မူရင်း sudo ကိုလည်း ဆက်သုံးနိုင်)။" },
+
+                { img: "slide2.jpg", tag: "😄 Tech သိကောင်းစရာ #၂",
+                  head: "Production ပေါ် တိုက်ရိုက် edit = တာဇံ",
+                  body: "ဥက္ကဋ္ဌကြီး၏ အဆိုအရ — staging မစမ်းဘဲ production ပေါ်တွင် တိုက်ရိုက် edit လုပ်ခြင်း၊ commit message ကို 'asdf' ဟု ရေးခြင်းတို့သည် 'digital တာဇံ' လုပ်ရပ်များ ဖြစ်သည်။ မြို့သားသခင်တစ်ယောက်သည် အမြဲ git branch ခွဲပြီးမှ commit လုပ်သည်။" },
+
                 { img: "slide1.jpg", tag: "🛠 ဆော့ဖ်ဝဲအစုံ",
                   head: "မြို့သားသခင် Developer Edition",
                   body: "VS Code, Git, Docker, Python, Node.js, Go, Java, PHP, Rust, C/C++, clang, ripgrep, fzf — အားလုံး ကြိုတင်တပ်ဆင်ပြီးသား။ Terminal ထဲတွင် \"thakhin-facts\" နှင့် \"tarzan-check\" ကို စမ်းကြည့်ပါ။\n\nBrowser homepage မှာ winkokolatt.me (offline မိတ္တူ) ဖြစ်သည်။" }
