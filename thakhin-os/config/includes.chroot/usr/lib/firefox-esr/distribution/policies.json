@@ -1,0 +1,25 @@
+{
+  "policies": {
+    "Homepage": {
+      "URL": "file:///usr/share/thakhin-os/website/index.html",
+      "StartPage": "homepage",
+      "Locked": false
+    },
+    "OverrideFirstRunPage": "file:///usr/share/thakhin-os/website/index.html",
+    "OverridePostUpdatePage": "file:///usr/share/thakhin-os/website/index.html",
+    "DisableTelemetry": true,
+    "DontCheckDefaultBrowser": true,
+    "Bookmarks": [
+      {
+        "Title": "ဥက္ကဋ္ဌကြီး ဝင်းကိုကိုလတ် | winkokolatt.me",
+        "URL": "https://winkokolatt.me/",
+        "Placement": "toolbar"
+      },
+      {
+        "Title": "Offline မိတ္တူ — သခင်ကြီး Website",
+        "URL": "file:///usr/share/thakhin-os/website/index.html",
+        "Placement": "toolbar"
+      }
+    ]
+  }
+}

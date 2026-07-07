@@ -1,0 +1,43 @@
+#!/bin/bash
+# Thakhin OS — rename the sudo *culture* to "thakhin" and theme the shell.
+# The real sudo binary is kept (dependencies rely on it); we add a themed
+# lecture + a first-class `thakhin` command + shell vibes.
+set -u
+
+# --- themed sudo lecture (shown once per user on the installed system) ---
+# Validate before installing: a malformed sudoers file could lock out root.
+cat > /etc/sudoers.d/10-thakhin <<'EOF'
+Defaults        lecture = always
+Defaults        lecture_file = /etc/sudo_thakhin.lecture
+Defaults        badpass_message = "☸ တာဇံ password! ထပ်ကြိုးစားပါ — ဥက္ကဋ္ဌကြီး စောင့်ကြည့်နေသည်။"
+EOF
+chmod 0440 /etc/sudoers.d/10-thakhin
+if ! visudo -cf /etc/sudoers.d/10-thakhin >/dev/null 2>&1; then
+  echo "WARN: thakhin sudoers snippet invalid — removing to keep sudo safe"
+  rm -f /etc/sudoers.d/10-thakhin
+fi
+
+# --- `thakhin` bash completion mirrors sudo's ---
+if [ -f /usr/share/bash-completion/completions/sudo ]; then
+  echo 'complete -F _sudo thakhin 2>/dev/null || true' \
+    > /usr/share/bash-completion/completions/thakhin
+fi
+
+# --- themed prompt + aliases for every new user (skel) ---
+cat >> /etc/skel/.bashrc <<'EOF'
+
+# ---- Thakhin OS shell culture ----
+# Gold ☸ prompt in the မဘသ palette
+PS1='\[\e[1;33m\]☸ \[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ '
+# "thakhin" is the blessed way to ask for root; keep sudo as muscle-memory too
+alias please='thakhin'
+alias root='thakhin'
+EOF
+
+# Root user gets the same vibe
+cat >> /root/.bashrc <<'EOF'
+
+PS1='\[\e[1;31m\]☸ ROOT \[\e[1;33m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]# '
+EOF
+
+echo "Thakhin sudo-culture installed."

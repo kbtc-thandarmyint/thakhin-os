@@ -1,0 +1,98 @@
+#!/bin/bash
+# Thakhin OS — offensive/defensive security arsenal (Kali/Parrot-style)
+# Deliberately resilient: a missing package, arch mismatch, or transient
+# network error must NEVER abort the ~1hr image build. Everything is best-effort.
+set -u
+export DEBIAN_FRONTEND=noninteractive
+ARCH="$(dpkg --print-architecture)"
+
+echo "==== Thakhin security arsenal: adding Kali repo (pinned) ===="
+# Kali rolling repo, pinned to priority 100 so it NEVER dist-upgrades the
+# Debian bookworm base — Kali packages are only pulled when explicitly named.
+if curl -fsSL --retry 3 https://archive.kali.org/archive-key.asc \
+     -o /usr/share/keyrings/kali-archive-keyring.asc 2>/dev/null; then
+  echo "deb [signed-by=/usr/share/keyrings/kali-archive-keyring.asc] https://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware" \
+    > /etc/apt/sources.list.d/kali.list
+  cat > /etc/apt/preferences.d/kali-pin <<'EOF'
+Package: *
+Pin: release o=Kali
+Pin-Priority: 100
+EOF
+  apt-get update || echo "WARN: apt update after Kali repo failed (continuing)"
+  KALI_OK=1
+else
+  echo "WARN: could not fetch Kali key — installing only Debian-native security tools"
+  KALI_OK=0
+fi
+
+# Install a whitespace/newline separated group; skip silently what is unavailable.
+inst() {
+  for pkg in $1; do
+    apt-get install -y --no-install-recommends "$pkg" >/dev/null 2>&1 \
+      && echo "  + $pkg" \
+      || echo "  - $pkg (unavailable, skipped)"
+  done
+}
+
+echo "==== Network scanning & recon ===="
+inst "nmap ncat masscan zmap arp-scan fping netdiscover hping3 dmitry
+      dnsrecon dnsenum fierce dnsutils whois dnsmap sublist3r
+      theharvester recon-ng maltego spiderfoot"
+
+echo "==== Sniffing & MITM ===="
+inst "wireshark tshark tcpdump ettercap-graphical ettercap-common dsniff
+      macchanger mitmproxy bettercap responder driftnet"
+
+echo "==== Wireless ===="
+inst "aircrack-ng reaver pixiewps cowpatty wifite kismet hostapd mdk4
+      bully fern-wifi-cracker hcxtools hcxdumptool"
+
+echo "==== Password attacks ===="
+inst "john john-data hashcat hydra hydra-gtk medusa ncrack crunch cewl
+      patator ophcrack wordlists seclists hashid hash-identifier
+      chntpw crowbar"
+
+echo "==== Web application ===="
+inst "sqlmap nikto dirb dirbuster wfuzz whatweb wapiti skipfish gobuster
+      ffuf commix joomscan wpscan zaproxy nuclei feroxbuster davtest
+      cadaver wafw00f"
+
+echo "==== Exploitation frameworks ===="
+inst "metasploit-framework set exploitdb armitage beef-xss
+      python3-impacket impacket-scripts crackmapexec netexec"
+
+echo "==== Reverse engineering & forensics ===="
+inst "radare2 rizin gdb gdb-multiarch ltrace strace binwalk foremost scalpel
+      testdisk sleuthkit autopsy exiftool steghide yara nasm
+      ghidra apktool dex2jar jadx checksec ropper edb-debugger
+      volatility3 bulk-extractor ddrescue"
+
+echo "==== Vulnerability & audit ===="
+inst "lynis chkrootkit rkhunter openvas-scanner nbtscan onesixtyone
+      snmp snmpcheck enum4linux enum4linux-ng smbclient smbmap
+      nikto legion sparta"
+
+echo "==== Anonymity & tunnelling ===="
+inst "tor torsocks proxychains4 openvpn redsocks obfs4proxy
+      macchanger stunnel4 sshuttle"
+
+echo "==== Scripting libs & misc ===="
+inst "python3-scapy python3-pwntools python3-requests python3-shodan
+      socat netcat-traditional netcat-openbsd rlwrap
+      seclists payloadsallthethings exe2hexbat"
+
+# Make Wireshark usable by non-root (dumpcap setuid group)
+if [ -x /usr/bin/dumpcap ]; then
+  groupadd -f wireshark 2>/dev/null || true
+  dpkg-reconfigure -f noninteractive wireshark-common 2>/dev/null || true
+  chgrp wireshark /usr/bin/dumpcap 2>/dev/null || true
+  chmod 754 /usr/bin/dumpcap 2>/dev/null || true
+  setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap 2>/dev/null || true
+fi
+
+# Symlinks so the classic Kali muscle-memory paths exist
+[ -d /usr/share/wordlists ] || mkdir -p /usr/share/wordlists
+[ -f /usr/share/wordlists/rockyou.txt.gz ] && gunzip -k /usr/share/wordlists/rockyou.txt.gz 2>/dev/null || true
+
+apt-get clean
+echo "==== Security arsenal hook finished (best-effort complete) ===="

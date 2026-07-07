@@ -1,0 +1,32 @@
+---
+componentName: thakhin
+
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+
+strings:
+    productName:         "Thakhin OS (သခင် OS)"
+    shortProductName:    "Thakhin OS"
+    version:             "1.0 — Anti-Tarzan Community Edition"
+    shortVersion:        "1.0"
+    versionedName:       "Thakhin OS 1.0 — Anti-Tarzan Community Edition"
+    shortVersionedName:  "Thakhin OS 1.0"
+    bootloaderEntryName: "Thakhin OS"
+    productUrl:          "https://winkokolatt.me/"
+    supportUrl:          "https://winkokolatt.me/#contact"
+    knownIssuesUrl:      "https://winkokolatt.me/#blog"
+    releaseNotesUrl:     "https://winkokolatt.me/#journey"
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+slideshowAPI:            1
+
+style:
+    sidebarBackground:    "#0d0d0d"
+    sidebarText:          "#FAFAFA"
+    sidebarTextSelect:    "#0d0d0d"
+    sidebarTextHighlight: "#D4AF37"

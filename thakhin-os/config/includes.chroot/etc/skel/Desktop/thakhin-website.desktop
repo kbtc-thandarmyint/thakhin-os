@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ဥက္ကဋ္ဌကြီး Website — winkokolatt.me
+Name[my]=ဥက္ကဋ္ဌကြီး Website — winkokolatt.me
+Comment=The official Win Ko Ko Latt website (bundled offline copy)
+Comment[my]=ဥက္ကဋ္ဌကြီး ဝင်းကိုကိုလတ်၏ တရားဝင် website (offline မိတ္တူ)
+Exec=xdg-open /usr/share/thakhin-os/website/index.html
+Icon=/usr/share/pixmaps/thakhinos.png
+Terminal=false
+Categories=Network;Documentation;

@@ -1,0 +1,85 @@
+/* Thakhin OS installer restyle — မဘသ website gold/dark theme */
+
+#mainApp {
+    background-color: #0d0d0d;
+}
+
+QWidget {
+    color: #FAFAFA;
+    font-family: "Padauk", "Noto Sans Myanmar", sans-serif;
+    font-size: 11pt;
+}
+
+#mainApp > QWidget, QDialog, QAbstractScrollArea {
+    background-color: #0d0d0d;
+}
+
+#sidebarApp, #sidebarMenuApp {
+    background-color: #0d0d0d;
+    border-right: 2px solid #D4AF37;
+}
+
+QPushButton {
+    background-color: #1a1a1a;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    padding: 7px 20px;
+    color: #D4AF37;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #D4AF37;
+    color: #0d0d0d;
+}
+QPushButton:pressed {
+    background-color: #FFD700;
+    color: #0d0d0d;
+}
+QPushButton:disabled {
+    border-color: #4a4a4a;
+    color: #6a6a6a;
+    background-color: #161616;
+}
+
+QProgressBar {
+    border: 1px solid #D4AF37;
+    border-radius: 7px;
+    background-color: #1a1a1a;
+    text-align: center;
+    color: #FAFAFA;
+    min-height: 14px;
+}
+QProgressBar::chunk {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                stop:0 #B8860B, stop:0.5 #D4AF37, stop:1 #FFD700);
+    border-radius: 6px;
+}
+
+QLineEdit, QComboBox, QSpinBox, QListView, QTreeView, QTableView, QTextEdit {
+    background-color: #1a1a1a;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    selection-background-color: #D4AF37;
+    selection-color: #0d0d0d;
+    padding: 3px;
+}
+QLineEdit:focus, QComboBox:focus {
+    border: 1px solid #D4AF37;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #1a1a1a;
+    selection-background-color: #D4AF37;
+    selection-color: #0d0d0d;
+}
+
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: #D4AF37;
+    border: 1px solid #FFD700;
+}
+
+QToolTip {
+    background-color: #1a1a1a;
+    color: #FFD700;
+    border: 1px solid #D4AF37;
+}

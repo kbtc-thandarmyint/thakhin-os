@@ -1,0 +1,27 @@
+#!/bin/sh
+# Desktop polish: default wallpaper everywhere, skel tweaks, shell greeting
+set -e
+
+# xfdesktop falls back to the XFCE stock backdrops for unknown monitor names —
+# overwrite them all with the Thakhin wallpaper (gdk-pixbuf sniffs content, not extension)
+if [ -d /usr/share/backgrounds/xfce ]; then
+  for f in /usr/share/backgrounds/xfce/*; do
+    cp /usr/share/backgrounds/thakhin/thakhin-wall-1.png "$f" || true
+  done
+fi
+
+# Desktop launchers must be executable to be trusted
+chmod +x /etc/skel/Desktop/*.desktop 2>/dev/null || true
+
+# Buddhist flag stripe (ANSI colors) appended to the MOTD
+printf '  \033[44m   \033[0m\033[103m   \033[0m\033[41m   \033[0m\033[107m   \033[0m\033[105m   \033[0m  ဗုဒ္ဓဘာသာအလံတော်အောက်တွင် သင့် Data များ ဘေးကင်းပါစေ\n\n' >> /etc/motd
+
+# Terminal greeting: neofetch + a random ဥက္ကဋ္ဌကြီး fact
+cat >> /etc/skel/.bashrc <<'EOF'
+
+# ---- Thakhin OS greeting ----
+if [ -n "$PS1" ]; then
+    command -v neofetch >/dev/null 2>&1 && neofetch
+    command -v thakhin-facts >/dev/null 2>&1 && thakhin-facts
+fi
+EOF

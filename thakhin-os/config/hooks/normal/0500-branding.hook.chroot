@@ -1,0 +1,37 @@
+#!/bin/sh
+# Rebrand the OS identity: os-release, issue, locales
+set -e
+
+cat > /usr/lib/os-release <<'EOF'
+PRETTY_NAME="Thakhin OS 1.0 (သခင် OS) — Anti-Tarzan Community Edition"
+NAME="Thakhin OS"
+VERSION_ID="1.0"
+VERSION="1.0 (thakin-gyi)"
+VERSION_CODENAME=bookworm
+ID=thakhinos
+ID_LIKE=debian
+HOME_URL="https://winkokolatt.me/"
+SUPPORT_URL="https://winkokolatt.me/#contact"
+BUG_REPORT_URL="https://winkokolatt.me/#contact"
+EOF
+ln -sf ../usr/lib/os-release /etc/os-release
+
+cat > /etc/issue <<'EOF'
+Thakhin OS 1.0 - Anti-Tarzan Community Edition \n \l
+
+EOF
+
+# Locales: English default, Burmese available
+if [ -f /etc/locale.gen ]; then
+  sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+  grep -q '^my_MM' /etc/locale.gen || echo 'my_MM UTF-8' >> /etc/locale.gen
+  locale-gen
+fi
+
+# GRUB on the *installed* system should say Thakhin OS, not Debian
+mkdir -p /etc/default
+if [ -f /etc/default/grub ]; then
+  sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="Thakhin OS"/' /etc/default/grub
+else
+  echo 'GRUB_DISTRIBUTOR="Thakhin OS"' > /etc/default/grub
+fi

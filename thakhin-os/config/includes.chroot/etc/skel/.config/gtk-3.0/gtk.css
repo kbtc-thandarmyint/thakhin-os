@@ -1,0 +1,14 @@
+/* Thakhin OS — မဘသ gold accents over Adwaita-dark */
+@define-color theme_selected_bg_color #D4AF37;
+@define-color theme_selected_fg_color #0d0d0d;
+@define-color accent_bg_color #D4AF37;
+@define-color accent_fg_color #0d0d0d;
+@define-color accent_color #FFD700;
+
+progressbar > trough > progress {
+    background-image: linear-gradient(to right, #B8860B, #FFD700);
+}
+
+headerbar {
+    border-bottom: 1px solid #D4AF37;
+}

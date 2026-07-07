@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Thakhin OS
+Description=Thakhin OS (သခင် OS) boot splash — Anti-Tarzan Community Edition
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/thakhin
+ScriptFile=/usr/share/plymouth/themes/thakhin/thakhin.script

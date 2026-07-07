@@ -1,0 +1,20 @@
+#!/bin/sh
+# Install Visual Studio Code from Microsoft's direct .deb
+# (the .deb also registers the MS apt repo for future updates).
+# Deliberately non-fatal: a network hiccup should not kill a 40-minute build.
+set -e
+
+case "$(dpkg --print-architecture)" in
+  amd64) VSCODE_TARGET="linux-deb-x64" ;;
+  arm64) VSCODE_TARGET="linux-deb-arm64" ;;
+  *)     VSCODE_TARGET="linux-deb-x64" ;;
+esac
+
+echo "Downloading Visual Studio Code ($VSCODE_TARGET)..."
+if curl -fsSL --retry 3 -o /tmp/code.deb \
+    "https://update.code.visualstudio.com/latest/${VSCODE_TARGET}/stable"; then
+  apt-get install -y /tmp/code.deb || echo "WARN: VS Code install failed, continuing without it"
+  rm -f /tmp/code.deb
+else
+  echo "WARN: VS Code download failed, continuing without it"
+fi

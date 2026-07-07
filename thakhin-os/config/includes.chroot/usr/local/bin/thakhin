@@ -1,0 +1,18 @@
+#!/bin/bash
+# thakhin — the Anti-Tarzan Association's blessed way to invoke authority.
+# Thin, transparent wrapper around sudo(8). The real sudo stays fully intact
+# so packages, scripts, and services that call `sudo` keep working; humans use
+# `thakhin` to request ဥက္ကဋ္ဌကြီး-level (root) permission the Thakhin way.
+#
+#   thakhin apt update           # like: sudo apt update
+#   thakhin                      # like: sudo -i  (root shell)
+#   thakhin -e /etc/hosts        # any sudo flag passes straight through
+
+GOLD='\033[1;33m'; NC='\033[0m'
+
+if [ "$#" -eq 0 ]; then
+    printf "${GOLD}☸ ဥက္ကဋ္ဌကြီး၏ အခွင့်အာဏာဖြင့် root shell ဖွင့်နေသည်…${NC}\n" >&2
+    exec sudo -i
+fi
+
+exec sudo "$@"

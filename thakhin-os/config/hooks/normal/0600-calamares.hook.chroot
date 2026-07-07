@@ -1,0 +1,10 @@
+#!/bin/sh
+# Point Calamares at the Thakhin branding (fun-fact slideshow lives there)
+set -e
+
+if [ -f /etc/calamares/settings.conf ]; then
+  sed -i 's/^branding:.*/branding: thakhin/' /etc/calamares/settings.conf
+  echo "Calamares branding switched to thakhin"
+else
+  echo "WARNING: /etc/calamares/settings.conf not found — installer will use default branding"
+fi

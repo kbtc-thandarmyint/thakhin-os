@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=တာဇံစစ်ဆေးရေး Quiz (tarzan-check)
+Name[my]=တာဇံစစ်ဆေးရေး Quiz
+Comment=Official Anti-Tarzan Association certification quiz
+Comment[my]=မြို့သားသခင်လား တာဇံလား — အခုစစ်ကြည့်ပါ
+Exec=xfce4-terminal --title="တာဇံစစ်ဆေးရေး" -e /usr/local/bin/tarzan-check
+Icon=/usr/share/pixmaps/mtc-seal.png
+Terminal=false
+Categories=Game;Education;
