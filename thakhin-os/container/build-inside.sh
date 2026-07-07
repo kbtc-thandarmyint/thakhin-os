@@ -38,6 +38,7 @@ bash /src/container/gen-art.sh "$BUILD"
 
 echo "==== [4/6] Customising bootloader templates ===="
 TPL=/usr/share/live/build/bootloaders
+mkdir -p "$BUILD/config/bootloaders"
 for bl in isolinux syslinux_common grub-pc; do
   if [ -d "$TPL/$bl" ] && [ ! -d "$BUILD/config/bootloaders/$bl" ]; then
     cp -a "$TPL/$bl" "$BUILD/config/bootloaders/$bl"
